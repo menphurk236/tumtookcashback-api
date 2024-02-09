@@ -9,10 +9,10 @@ export class CustomerService {
   async findAll(searchDto: SearchDto): Promise<object> {
     let item = []
     const searchBody = searchDto.search.trim()
-    const check = searchBody === 'บริษั' ? false : searchBody !== 'บริษัท'
+    const check = searchBody === 'บริษ' ? false : searchBody !== 'บริษัท'
     const searchExclude = searchBody.split('บริษัท')
-    const search = searchExclude.length > 1 ? searchExclude[1].trim().length >= 5 ? searchExclude[1].trim() : null : searchDto.search
-    if (searchDto.search.length >= 5 && check) {
+    const search = searchExclude.length > 1 ? searchExclude[1].trim().length >= 3 ? searchExclude[1].trim() : null : searchDto.search
+    if (searchDto.search.length >= 3 && check) {
       item = await this.customerRepository.searchCustomer(search)
     }
     return {

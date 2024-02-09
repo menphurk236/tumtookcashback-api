@@ -25,4 +25,4 @@ COPY --from=builder /app/uploads ./uploads
 
 EXPOSE 3001
 # 👇 new migrate and start app script
-CMD [  "npm", "run", "start:migrate:prod" ]
+CMD [  "npm", "run", "start:prod" ]

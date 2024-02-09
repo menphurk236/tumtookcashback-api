@@ -5,7 +5,7 @@ import { SearchDto } from '../shared/dto/search.dto';
 
 @Injectable()
 export class CustomerRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: Prisma.CustomerUncheckedCreateInput) {
     return this.prisma.customer
@@ -68,10 +68,10 @@ export class CustomerRepository {
                 item.name && item.company
                   ? `${item.name} | ${item.company}`
                   : item.name
-                  ? item.name
-                  : item.company
-                  ? item.company
-                  : null,
+                    ? item.name
+                    : item.company
+                      ? item.company
+                      : null,
               tel: item.tel,
               tax: item.tax ? item.tax : 'ลูกค้าทั่วไป',
               balance: item.balance,
@@ -140,15 +140,15 @@ export class CustomerRepository {
 
   async findByPhone(tel: string) {
     return await this.prisma.customer
-        .findFirst({
-          where: {
-            tel,
-            NOT: [{ flag: 'delete' }],
-          },
-        })
-        .catch(async (e: Prisma.PrismaClientKnownRequestError) => {
-          throw new InternalServerErrorException('เซิฟเวอร์มีปัญหา');
-        });
+      .findFirst({
+        where: {
+          tel,
+          NOT: [{ flag: 'delete' }],
+        },
+      })
+      .catch(async (e: Prisma.PrismaClientKnownRequestError) => {
+        throw new InternalServerErrorException('เซิฟเวอร์มีปัญหา');
+      });
   }
 
   async update(id: number, data: Prisma.CustomerUpdateInput) {
@@ -235,7 +235,7 @@ export class CustomerRepository {
               OR: [
                 {
                   tel: {
-                    contains: search,
+                    contains: search.trim(),
                   },
                 },
                 {

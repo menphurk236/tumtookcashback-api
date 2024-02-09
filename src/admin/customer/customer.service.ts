@@ -1,4 +1,4 @@
-import {BadRequestException, Injectable} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCustomersDto } from './dto/create-customers.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { SearchDto } from '../../shared/dto/search.dto';
@@ -11,7 +11,7 @@ export class CustomerService {
   constructor(
     private customerRepository: CustomerRepository,
     private transactionRepository: TransactionRepository,
-  ) {}
+  ) { }
   async create(body: CreateCustomersDto, user: any): Promise<object> {
     const data: Prisma.CustomerUncheckedCreateInput = {
       company: body.company,
@@ -47,8 +47,9 @@ export class CustomerService {
   }
 
   async findOne(id: number): Promise<object> {
+    console.log('id', id);
     const item = await this.customerRepository.findById(id);
-    if (item) {
+    if (!item) {
       throw new BadRequestException('ไม่พบข้อมูลลูกค้า')
     }
     item.createdAt = undefined;

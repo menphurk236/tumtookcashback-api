@@ -66,18 +66,18 @@ export class CustomerService {
       tel: body.tel,
     };
     const item = await this.customerRepository.findById(id);
-    if (item) {
+    if (!item) {
       throw new BadRequestException('ไม่พบข้อมูลลูกค้า')
     }
 
-    if (body.tel !== '-') {
-      if (item.tel !== body.tel) {
-        const check = await this.customerRepository.findByPhone(body.tel)
-        if (check) {
-          throw new BadRequestException('เบอร์โทรศัพท์นี้มีในระบบแล้ว')
-        }
-      }
-    }
+    // if (body.tel !== '-') {
+    //   if (item.tel !== body.tel) {
+    //     const check = await this.customerRepository.findByPhone(body.tel)
+    //     if (check) {
+    //       throw new BadRequestException('เบอร์โทรศัพท์นี้มีในระบบแล้ว')
+    //     }
+    //   }
+    // }
     await this.customerRepository.update(id, data);
     return {
       message: 'แก้ไขสำเร็จ',

@@ -17,7 +17,7 @@ export class TransactionsService {
     private transactionFileRepository: TransactionFileRepository,
     private readonly generateImageService: GenerateImageService,
     private readonly generatePdfService: GeneratePdfService,
-  ) {}
+  ) { }
   async create(
     body: CreateTransactionDto,
     files: any,
@@ -38,6 +38,7 @@ export class TransactionsService {
       remark: body.remark,
       withdraw: +body.withdraw,
       deposit: +body.deposit,
+      createdAt: new Date(),
     };
 
     if (files.length > 0) {

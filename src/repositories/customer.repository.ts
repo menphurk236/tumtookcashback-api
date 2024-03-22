@@ -129,7 +129,7 @@ export class CustomerRepository {
           tel: item.tel,
           tax: item.tax,
           balance: item.balance,
-          createdAt: `${item.createdAt.getDate()}/${item.createdAt.getMonth()}/${item.createdAt.getFullYear()}`,
+          createdAt: `${item.createdAt.getDate()}/${item.createdAt.getMonth() + 1}/${item.createdAt.getFullYear()}`,
         };
       })
       .catch(async (e: Prisma.PrismaClientKnownRequestError) => {

@@ -37,8 +37,7 @@ export class TransactionsService {
       cashBack: customer.balance,
       remark: body.remark,
       withdraw: +body.withdraw,
-      deposit: +body.deposit,
-      createdAt: new Date(),
+      deposit: +body.deposit
     };
 
     if (files.length > 0) {

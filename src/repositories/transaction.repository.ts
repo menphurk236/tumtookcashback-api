@@ -5,7 +5,7 @@ import { SearchDto } from '../shared/dto/search.dto';
 
 @Injectable()
 export class TransactionRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async findAllToday(searchDto: SearchDto, gte) {
     return await this.prisma.transaction
@@ -36,7 +36,7 @@ export class TransactionRepository {
               name: `${item.user.firstName} ${item.user.lastName}`,
               balance: item.balance,
               remark: item.remark,
-              createdAt: `${item.createdAt.getDate()}/${item.createdAt.getMonth()}/${item.createdAt.getFullYear()}`,
+              createdAt: `${item.createdAt.getDate()}/${item.createdAt.getMonth() + 1}/${item.createdAt.getFullYear()}`,
               key: key + 1,
             };
           }),
@@ -129,7 +129,7 @@ export class TransactionRepository {
               customerId: item.customerId,
               tax: item.customer.tax ? item.customer.tax : 'ลูกค้าทั่วไป',
               tel: item.customer.tel,
-              createdAt: `${item.createdAt.getDate()}/${item.createdAt.getMonth()}/${item.createdAt.getFullYear()}`,
+              createdAt: `${item.createdAt.getDate()}/${item.createdAt.getMonth() + 1}/${item.createdAt.getFullYear()}`,
               deposit: item.deposit,
               withdraw: item.withdraw,
               balance: item.balance,
@@ -225,8 +225,8 @@ export class TransactionRepository {
             return {
               id: item.id,
               tax: item.customer.tax ? item.customer.tax : 'ลูกค้าทั่วไป',
-              tel: item.customer.tel? item.customer.tel : '-',
-              createdAt: `${item.createdAt.getDate()}/${item.createdAt.getMonth()}/${item.createdAt.getFullYear()}`,
+              tel: item.customer.tel ? item.customer.tel : '-',
+              createdAt: `${item.createdAt.getDate()}/${item.createdAt.getMonth() + 1}/${item.createdAt.getFullYear()}`,
               deposit: item.deposit,
               withdraw: item.withdraw,
               balance: item.balance,
